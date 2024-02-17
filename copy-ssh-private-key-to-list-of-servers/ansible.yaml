@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Get public key (not private key) with cat
+      shell: "cat $HOME/.ssh/work.pub"
+      register: public_key
+
+- hosts: gcp
+  vars:
+    public_key_from_localhost: "{{ hostvars['localhost']['public_key']['stdout'] }}"
+  tasks:
+    - name: Write public key to authorized_keys
+      lineinfile:
+        path: $HOME/.ssh/authorized_keys
+        line: "{{ public_key_from_localhost }}"
+        create: yes
+        mode: 0644  # Adjust permissions as needed
+

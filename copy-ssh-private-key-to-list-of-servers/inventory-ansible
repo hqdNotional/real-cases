@@ -1,0 +1,9 @@
+[gcp]
+35.194.109.115
+34.85.113.253
+34.84.8.251
+34.146.75.220
+
+[gcp:vars]
+ansible_ssh_user = gcp
+ansible_ssh_private_key_file = ~/.ssh/id_rsa
