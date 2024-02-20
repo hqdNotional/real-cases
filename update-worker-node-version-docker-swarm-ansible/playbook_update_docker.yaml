@@ -1,0 +1,47 @@
+- hosts: master1-instance
+  become: true
+  tasks:
+  - name: Drain node
+    shell: "docker node update --availability drain {{ item }}"
+    loop: "{{ groups['updatenodes'] }}"
+- hosts: updatenodes
+  become: true
+  tasks:
+  - name: Install git
+    yum:
+      name: git
+  - name: Install yum utils
+    yum:
+      name: yum-utils
+  - name: Remove docker
+    yum:
+      name: 
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+      state: absent
+  - name: Add repo
+    shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  - name: Install docker
+    yum:
+      name: 
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+      state: present
+  - name: Reload daemon
+    shell: systemctl daemon-reload
+  - name: Start docker
+    systemd: 
+      name: docker
+      state: started
+- hosts: master1-instance
+  become: true
+  tasks:
+  - name: Activate node
+    shell: "docker node update --availability active {{ item }}"
+    loop: "{{ groups['updatenodes'] }}"
