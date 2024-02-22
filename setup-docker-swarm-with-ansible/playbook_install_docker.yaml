@@ -1,11 +1,6 @@
 - hosts: cluster
   become: true
   tasks:
-  - name: Update
-    yum:
-      name: "*"
-      state: latest
-      update-cache: yes
   - name: Install wget
     yum:
       name: wget
@@ -35,7 +30,7 @@
         - containerd.io
         - docker-buildx-plugin
         - docker-compose-plugin
-      state: absent
+      state: present
   - name: Start docker
     systemd:
       name: docker
