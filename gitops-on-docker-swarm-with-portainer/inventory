@@ -1,0 +1,25 @@
+[cluster:children]
+masters
+workers
+
+[firstmaster]
+master1-instance ansible_host= server_name=master1-instance
+
+[othermasters]
+master2-instance ansible_host= server_name=master2-instance
+
+[masters:children]
+firstmaster
+othermasters
+
+[workers]
+worker1-instance ansible_host= server_name=worker1-node
+worker2-instance ansible_host= server_name=worker2-node
+
+[masters:vars]
+ansible_ssh_user=gcp
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[workers:vars]
+ansible_ssh_user=gcp
+ansible_ssh_private_key_file=~/.ssh/id_rsa

@@ -1,0 +1,11 @@
+- hosts: master1-instance
+  become: true
+  tasks:
+  - name: Create portainer volume
+    shell: docker volume create portainer_data
+  - name: Run portainer container
+    shell: docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+  - name: Get docker compose file
+    shell: curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml
+  - name: Deploy stack
+    shell: docker stack deploy --compose-file=portainer-agent-stack.yml portainer

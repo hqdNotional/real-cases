@@ -1,0 +1,9 @@
+- hosts: master1-instance
+  become: true
+  tasks:
+  - name: Get location
+    shell:  docker service ps portainer_portainer
+    register:  location
+  - name: Print location
+    debug:
+      msg: "{{ location.stdout_lines }}"
