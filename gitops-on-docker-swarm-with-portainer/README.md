@@ -1,4 +1,4 @@
-# Setup docker swarm using ansible
+# Gitops on Docker Swarm with Portainer
 On `Kubernetes`. We have `Flux` and `ArgoCD` for `gitops`, so how about `Docker Swarm`.
 
 This is a demonstration `gitops` on `docker swarm` using `Portainer`

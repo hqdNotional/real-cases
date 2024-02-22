@@ -1,4 +1,4 @@
-# Setup docker swarm using ansible
+# Update docker version with ansible
 This is a demonstration of using terraform to setup docker swarm using ansible
 
 ## 1. Prerequisites
