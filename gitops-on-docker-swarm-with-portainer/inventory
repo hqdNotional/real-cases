@@ -1,25 +1,27 @@
+master1-instance ansible_host=34.146.57.110 server_name=master1-instance
+master2-instance ansible_host=104.198.81.112 server_name=master2-instance
+worker1-instance ansible_host=34.146.134.109 server_name=worker1-node
+worker2-instance ansible_host=34.84.94.130 server_name=worker2-node
+
 [cluster:children]
 masters
 workers
 
 [firstmaster]
-master1-instance ansible_host= server_name=master1-instance
+master1-instance
 
 [othermasters]
-master2-instance ansible_host= server_name=master2-instance
+master2-instance
 
 [masters:children]
 firstmaster
 othermasters
 
 [workers]
-worker1-instance ansible_host= server_name=worker1-node
-worker2-instance ansible_host= server_name=worker2-node
+worker1-instance
+worker2-instance
 
-[masters:vars]
-ansible_ssh_user=gcp
-ansible_ssh_private_key_file=~/.ssh/id_rsa
-
-[workers:vars]
+[cluster:vars]
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 ansible_ssh_user=gcp
 ansible_ssh_private_key_file=~/.ssh/id_rsa
