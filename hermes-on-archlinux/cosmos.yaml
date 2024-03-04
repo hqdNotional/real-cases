@@ -1,0 +1,158 @@
+---
+Outputs:
+  Cosmos1PublicIp:
+    Description: Cosmos1 Public IP
+    Value: !GetAtt Cosmos1.PublicIp
+    Export:
+      Name: !Sub "${AWS::StackName}-Cosmos1-PublicIp"
+  Cosmos2PublicIp:
+    Description: Cosmos2 Public IP
+    Value: !GetAtt Cosmos2.PublicIp
+    Export:
+      Name: !Sub "${AWS::StackName}-Cosmos2-PublicIp"
+Resources:
+  myVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: 'true'
+      EnableDnsHostnames: 'true'
+      Tags:
+       - Key: name
+         Value: production
+  mySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: myVPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: "ap-northeast-1a"
+      Tags:
+      - Key: name
+        Value: production
+  myInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: name
+        Value: production
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: myVPC
+      InternetGatewayId:
+        Ref: myInternetGateway
+  myRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:  
+        Ref: myVPC
+      Tags:
+      - Key: name
+        Value: production
+  myRoute:
+    Type: AWS::EC2::Route
+    DependsOn: myInternetGateway
+    Properties:
+       RouteTableId:
+         Ref: myRouteTable
+       DestinationCidrBlock: 0.0.0.0/0
+       GatewayId:
+         Ref: myInternetGateway
+  mySubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId:
+        Ref: mySubnet
+      RouteTableId:
+        Ref: myRouteTable
+  mySG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http to client host
+      VpcId: !Ref myVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0
+  Cosmos1ENI:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+       Tags:
+       - Key: name
+         Value: Cosmos1
+       Description: A nice description.
+       SourceDestCheck: 'false'
+       GroupSet: [
+        Ref: mySG
+        ]
+       SubnetId: 
+        Ref: mySubnet
+       PrivateIpAddress: 10.0.0.50
+  Cosmos2ENI:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+       Tags:
+       - Key: name
+         Value: Cosmos2
+       Description: A nice description.
+       SourceDestCheck: 'false'
+       GroupSet: [
+        Ref: mySG
+        ]
+       SubnetId: 
+        Ref: mySubnet
+       PrivateIpAddress: 10.0.0.51
+  Cosmos1:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: "ami-0b5c74e235ed808b9"
+      KeyName: "Window2"
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - Ref: "mySG"
+          SubnetId: 
+            Ref: "mySubnet"
+      InstanceType: t2.2xlarge
+  Cosmos2: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: "ami-0b5c74e235ed808b9"
+      KeyName: "Window2"
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - Ref: "mySG"
+          SubnetId: 
+            Ref: "mySubnet"
+      InstanceType: t2.2xlarge
+  Cosmos1ENIAttach:
+     Type: AWS::EC2::NetworkInterfaceAttachment
+     Properties:
+        DeleteOnTermination: True
+        InstanceId:
+           Ref: Cosmos1
+        NetworkInterfaceId:
+           Ref: Cosmos1ENI
+        DeviceIndex: 1
+  Cosmos2ENIAttach:
+     Type: AWS::EC2::NetworkInterfaceAttachment
+     Properties:
+        DeleteOnTermination: True
+        InstanceId:
+           Ref: Cosmos2
+        NetworkInterfaceId:
+           Ref: Cosmos2ENI
+        DeviceIndex: 1
+
+
