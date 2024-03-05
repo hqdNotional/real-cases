@@ -14,3 +14,4 @@ RUN chmod +x /usr/local/bin/gaiad
 
 CMD ["/bin/bash"]
 
+
