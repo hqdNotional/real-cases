@@ -26,6 +26,16 @@ docker run -it -d --hostname cosmos1 --name cosmos1 --net host cosmos:latest
 docker run -it -d --hostname cosmos2 --name cosmos2 --net host cosmos:latest
 docker run -it -d --hostname hermes --name hermes --net host hermes:latest
 ```
+ENV:
+```
+export HERMESHASH=
+```
+```
+export COSMOS1HASH=
+```
+```
+export COSMOS2HASH=
+```
 
 #### 4. Run script inside containers
 Cosmos1:
@@ -63,7 +73,8 @@ docker exec -it $HERMESHASH /bin/bash
 vim $HOME/key1.json $HOME/key2.json 
 ```
 #### 6. Add key on Hermes
-Write default `config.toml` to `HERMES`:
+Write default `config.toml` to `HERMES`. Remember to edit the config file follow your config:
+
 ```
 docker exec -it $HERMESHASH /bin/bash
 mkdir -p $HOME/.hermes
@@ -74,3 +85,25 @@ Add keys:
 docker exec -it $HERMESHASH /bin/bash
 hermes keys add --chain cosmoshub-4 IN_ID --key-file ./key1.json
 hermes keys add --chain cosmoshub-5 IN_ID --key-file ./key2.json
+```
+#### 7. Initialize client, connection and channel
+```
+docker exec -it $HERMESHASH /bin/bash
+```
+Client:
+```
+hermes create client --host-chain cosmoshub-5 --reference-chain cosmoshub-4
+hermes create client --host-chain cosmoshub-4 --reference-chain cosmoshub-5
+```
+Connection:
+```
+hermes create connection --a-chain cosmoshub-4 --a-client 07-tendermint-0 --b-client 07-tendermint-0
+```
+Channel:
+```
+hermes create channel --a-chain cosmoshub-4 --a-connection connection-0 --a-port transfer --b-port transfer
+```
+Check:
+```
+hermes query channels --show-counterparty --chain cosmoshub-4
+```
