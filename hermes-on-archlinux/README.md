@@ -91,8 +91,10 @@ Write default `config.toml` to `HERMES`. Remember to edit the config file follow
 
 ```
 docker exec -it $HERMESHASH /bin/bash
+```
+```
 mkdir -p $HOME/.hermes
-vim $HOME./hermes/config.toml
+vim $HOME/.hermes/config.toml
 ```
 Add keys:
 

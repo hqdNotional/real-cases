@@ -26,11 +26,11 @@ host = '127.0.0.1'
 port = 3001
 
 [[chains]]
-id = 'ibc-0'
+id = 'cosmoshub-4'
 type = "CosmosSdk"
-rpc_addr = 'http://localhost:27030'
-grpc_addr = 'http://localhost:27032'
-event_source = { mode = 'push', url = 'ws://localhost:27030/websocket', batch_delay = '200ms' }
+rpc_addr = 'http://localhost:1002'
+grpc_addr = 'http://localhost:1003'
+event_source = { mode = 'push', url = 'ws://localhost:27030/1002', batch_delay = '200ms' }
 rpc_timeout = '15s'
 trusted_node = true
 account_prefix = 'cosmos'
@@ -55,11 +55,11 @@ trust_threshold = { numerator = '2', denominator = '3' }
 # ]
 
 [[chains]]
-id = 'ibc-1'
+id = 'cosmoshub-5'
 type = "CosmosSdk"
-rpc_addr = 'http://localhost:27040'
-grpc_addr = 'http://localhost:27042'
-event_source = { mode = 'push', url = 'ws://localhost:27040/websocket', batch_delay = '200ms' }
+rpc_addr = 'http://localhost:1006'
+grpc_addr = 'http://localhost:1007'
+event_source = { mode = 'push', url = 'ws://localhost:1006/websocket', batch_delay = '200ms' }
 rpc_timeout = '15s'
 trusted_node = true
 account_prefix = 'cosmos'
