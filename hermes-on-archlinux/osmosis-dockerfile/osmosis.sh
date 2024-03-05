@@ -9,7 +9,7 @@ wget -O addrbook.json https://snapshots.polkachu.com/addrbook/osmosis/addrbook.j
 mv addrbook.json ~/.osmosisd/config
 
 wget -O osmosis_18331310.tar.lz4 $SNAPSHOT_LINK --inet4-only
-lz4 -c -d osmosis_18331310.tar.lz4  | tar -x -C ~/.gaia
+lz4 -c -d osmosis_18331310.tar.lz4  | tar -x -C ~/.osmosisd
 
 # Start chain
-osmosisd start --p2p.laddr tcp://0.0.0.0:1001 --rpc.laddr tcp://127.0.0.1:1002 --grpc.address 127.0.0.1:1003 --grpc-web.address 127.0.0.1:1004
+osmosisd start --p2p.laddr tcp://0.0.0.0:1005 --rpc.laddr tcp://127.0.0.1:1006 --grpc.address 127.0.0.1:1007 --grpc-web.address 127.0.0.1:1008

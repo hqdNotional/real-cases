@@ -2,8 +2,7 @@ FROM archlinux:latest
 
 WORKDIR /root
 
-COPY ./cosmos1.sh .
-COPY ./cosmos2.sh .
+COPY ./cosmos.sh .
 
 RUN pacman -Sy --noconfirm sudo
 RUN pacman -Syu --noconfirm
