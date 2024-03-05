@@ -62,3 +62,15 @@ Write down your `json` output from `cosmos1` and `cosmos2`:
 docker exec -it $HERMESHASH /bin/bash
 vim $HOME/key1.json $HOME/key2.json 
 ```
+#### 6. Add key on Hermes
+Write default `config.toml` to `HERMES`:
+```
+docker exec -it $HERMESHASH /bin/bash
+mkdir -p $HOME/.hermes
+vim $HOME./hermes/config.toml
+```
+Add keys:
+```
+docker exec -it $HERMESHASH /bin/bash
+hermes keys add --chain cosmoshub-4 IN_ID --key-file ./key1.json
+hermes keys add --chain cosmoshub-5 IN_ID --key-file ./key2.json
