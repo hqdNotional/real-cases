@@ -60,12 +60,22 @@ docker exec -it $HERMESHASH /bin/bash
 Cosmos1:
 ```
 docker exec -it $COSMOS1HASH /bin/bash
+```
+```
+export KEY=
+```
+```
 gaiad keys add $KEY --output json
 ```
 
 Cosmos2:
 ```
 docker exec -it $COSMOS2HASH /bin/bash
+```
+```
+export KEY=
+```
+```
 gaiad keys add $KEY --output json
 ```
 
