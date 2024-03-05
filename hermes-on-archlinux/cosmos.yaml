@@ -115,6 +115,15 @@ Resources:
     Properties: 
       ImageId: "ami-0b5c74e235ed808b9"
       KeyName: "Window2"
+      BlockDeviceMappings: 
+      - DeviceName: "/dev/sdm"
+        Ebs: 
+          VolumeType: "io1"
+          Iops: "200"
+          DeleteOnTermination: "false"
+          VolumeSize: "1000"
+      - DeviceName: "/dev/sdk"
+        NoDevice: {}
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
@@ -128,6 +137,15 @@ Resources:
     Properties: 
       ImageId: "ami-0b5c74e235ed808b9"
       KeyName: "Window2"
+      BlockDeviceMappings: 
+      - DeviceName: "/dev/sdm"
+        Ebs: 
+          VolumeType: "io1"
+          Iops: "200"
+          DeleteOnTermination: "false"
+          VolumeSize: "1000"
+      - DeviceName: "/dev/sdk"
+        NoDevice: {}
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
@@ -154,5 +172,4 @@ Resources:
         NetworkInterfaceId:
            Ref: Cosmos2ENI
         DeviceIndex: 1
-
 
