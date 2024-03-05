@@ -41,11 +41,15 @@ export COSMOS2HASH=
 Cosmos1:
 ```
 docker exec -it $COSMOS1HASH /bin/bash
+```
+```
 sh $HOME/cosmos1.sh
 ```
 Cosmos2:
 ```
 docker exec -it $COSMOS2HASH /bin/bash
+```
+```
 sh $HOME/cosmos2.sh
 ```
 Hermes:
