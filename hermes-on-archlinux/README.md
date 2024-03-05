@@ -81,6 +81,8 @@ mkdir -p $HOME/.hermes
 vim $HOME./hermes/config.toml
 ```
 Add keys:
+
+Why `cosmoshub-4` and `cosmoshub-5`. I specify it in `cosmos1.sh` and `cosmos2.sh`.
 ```
 docker exec -it $HERMESHASH /bin/bash
 hermes keys add --chain cosmoshub-4 IN_ID --key-file ./key1.json
