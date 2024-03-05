@@ -101,8 +101,10 @@ Add keys:
 Why `cosmoshub-4` and `cosmoshub-5`. I specify it in `cosmos1.sh` and `cosmos2.sh`.
 ```
 docker exec -it $HERMESHASH /bin/bash
-hermes keys add --chain cosmoshub-4 IN_ID --key-file ./key1.json
-hermes keys add --chain cosmoshub-5 IN_ID --key-file ./key2.json
+```
+```
+hermes keys add --chain cosmoshub-4 --key-file ./key1.json
+hermes keys add --chain cosmoshub-5 --key-file ./key2.json
 ```
 #### 7. Initialize client, connection and channel
 ```
