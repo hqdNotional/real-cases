@@ -7,6 +7,12 @@ cd $HOME
 git clone git@github.com:hqdNotional/real-cases.git
 cd $HOME/real-cases
 ```
+Update repo:
+
+Note: This will delete all your containers and images:
+```
+sh $HOME/real-cases/hermes-on-archlinux/update.sh
+```
 
 #### 2. Images
 Hermes:
