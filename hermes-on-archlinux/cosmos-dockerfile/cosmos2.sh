@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export CHAIN_NAME="TEST2"
-export SNAPSHOT_LINK="https://snapshots.polkachu.com/snapshots/cosmos/cosmos_19414580.tar.lz4"
+export SNAPSHOT_LINK="https://snapshots.polkachu.com/testnet-snapshots/cosmos/cosmos_5489146.tar.lz4"
 
 gaiad init $CHAIN_NAME --chain-id cosmoshub-5
 
