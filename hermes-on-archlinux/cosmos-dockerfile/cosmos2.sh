@@ -3,7 +3,7 @@
 export CHAIN_NAME="TEST2"
 export SNAPSHOT_LINK="https://snapshots.polkachu.com/snapshots/cosmos/cosmos_19428449.tar.lz4"
 
-gaiad init $CHAIN_NAME --chain-id cosmoshub-5
+gaiad init $CHAIN_NAME --chain-id cosmoshub-4
 
 wget -O addrbook.json https://snapshots.polkachu.com/addrbook/cosmos/addrbook.json --inet4-only
 mv addrbook.json ~/.gaia/config
