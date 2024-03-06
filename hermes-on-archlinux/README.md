@@ -34,9 +34,46 @@ Hermes:
 docker exec -it $HERMESHASH /bin/bash
 ```
 #### 5. Initialize client, connection and channel
+Write gm config:
 ```
-docker exec -it $HERMESHASH /bin/bash
+cat << EOF | sudo tee -a $HOME/.gm/gm.config
+[global]
+  add_to_hermes = false
+  auto_maintain_config = true
+  extra_wallets = 2
+  gaiad_binary = "/usr/local/bin/gaiad"
+  hdpath = ""
+  home_dir = "$HOME/.gm"
+  ports_start_at = 27000
+  validator_mnemonic = ""
+  wallet_mnemonic = ""
+
+  [global.hermes]
+    binary = "/usr/local/bin/hermes" #change this path according to your setup
+    config = "$HOME/.hermes/config.toml"
+    log_level = "info"
+    telemetry_enabled = true
+    telemetry_host = "127.0.0.1"
+    telemetry_port = 3001
+
+[ibc-0]
+  ports_start_at = 27010
+
+[ibc-1]
+  ports_start_at = 27020
+
+[node-0]
+  add_to_hermes = true
+  network = "ibc-0"
+  ports_start_at = 27030
+
+[node-1]
+  add_to_hermes = true
+  network = "ibc-1"
+  ports_start_at = 27040
+EOF
 ```
+
 Client:
 ```
 hermes create client --host-chain cosmoshub-5 --reference-chain cosmoshub-4
