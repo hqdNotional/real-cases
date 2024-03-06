@@ -4,7 +4,7 @@
 #### 1. Repo
 ```
 cd $HOME
-git clone git@github.com:hqdNotional/real-cases.git
+git clone https://github.com/hqdNotional/real-cases.git
 cd $HOME/real-cases
 ```
 Update repo:
