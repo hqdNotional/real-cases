@@ -14,7 +14,7 @@ RUN mv gaiad-v14.1.0-linux-amd64 /usr/local/bin/gaiad
 RUN chmod +x /usr/local/bin/gaiad
 RUN git clone https://github.com/informalsystems/gm && cp -f $HOME/gm/bin/* /usr/local/bin
 RUN go install github.com/freshautomations/sconfig@latest && cp $HOME/go/bin/sconfig /usr/local/bin
-RUN curl https://github.com/freshautomations/stoml/releases/download/v0.7.0/stoml_linux_amd64 -o /usr/local/bin/stoml && chmod +x /usr/local/bin/stoml
+RUN wget https://github.com/freshautomations/stoml/releases/download/v0.7.1/stoml_linux_amd64 && mv stoml /usr/local/bin/stoml && chmod +x /usr/local/bin/stoml
 RUN mkdir -p $HOME/.gm
 RUN mv /root/go/bin/sconfig /usr/local/bin/sconfig
 
