@@ -9,6 +9,10 @@ RUN wget https://github.com/informalsystems/hermes/releases/download/v1.8.0/herm
 RUN tar -xvzf hermes-v1.8.0-x86_64-unknown-linux-gnu.tar.gz
 RUN mv -f hermes /usr/local/bin
 RUN rm -f hermes-v1.8.0-x86_64-unknown-linux-gnu.tar.gz
+RUN wget https://github.com/cosmos/gaia/releases/download/v14.1.0/gaiad-v14.1.0-linux-amd64
+RUN mv gaiad-v14.1.0-linux-amd64 /usr/local/bin/gaiad
+RUN chmod +x /usr/local/bin/gaiad
+RUN git clone https://github.com/informalsystems/gm && cp -f $HOME/gm/bin/* /usr/local/bin
 
 CMD ["/bin/bash"]
 
