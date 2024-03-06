@@ -30,7 +30,7 @@ id = 'cosmoshub-4'
 type = "CosmosSdk"
 rpc_addr = 'http://localhost:1002'
 grpc_addr = 'http://localhost:1003'
-event_source = { mode = 'push', url = 'ws://localhost:27030/1002', batch_delay = '200ms' }
+event_source = { mode = 'push', url = 'ws://localhost:1002/websocket', batch_delay = '200ms' }
 rpc_timeout = '15s'
 trusted_node = true
 account_prefix = 'cosmos'
@@ -55,7 +55,7 @@ trust_threshold = { numerator = '2', denominator = '3' }
 # ]
 
 [[chains]]
-id = 'cosmoshub-5'
+id = 'cosmoshub-4'
 type = "CosmosSdk"
 rpc_addr = 'http://localhost:1006'
 grpc_addr = 'http://localhost:1007'
