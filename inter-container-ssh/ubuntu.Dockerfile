@@ -9,6 +9,8 @@ RUN apt-get update && \
     sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
     service ssh restart
 
+RUN echo "root:root" | chpasswd
+
 EXPOSE 22
 
 CMD sh loop.sh
