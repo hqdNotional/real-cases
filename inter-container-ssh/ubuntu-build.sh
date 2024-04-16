@@ -9,3 +9,5 @@ docker build --platform="linux/amd64" -t haquocdat543/ubuntu:$tag -f ubuntu.Dock
 
 
 
+
+
